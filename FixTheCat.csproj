@@ -106,8 +106,11 @@
     <None Include="res\c3.jpg" />
     <None Include="res\c2.jpg" />
     <None Include="res\c1.jpg" />
-    <Content Include="res\curHand3d.cur" />
-    <Content Include="res\curPointer3d.cur" />
+    <Content Include="curHand.cur" />
+    <Content Include="curPointer.cur" />
+    <Content Include="jigsaw-puzzle-texture-background.png" />
+    <None Include="res\background-of-puzzle-pieces.jpg" />
+    <None Include="res\puzzle_bg.jpg" />
     <Content Include="solid-color-image.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -63,6 +63,16 @@ namespace FixTheCat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background_of_puzzle_pieces {
+            get {
+                object obj = ResourceManager.GetObject("background-of-puzzle-pieces", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap c1 {
             get {
                 object obj = ResourceManager.GetObject("c1", resourceCulture);
@@ -166,6 +176,16 @@ namespace FixTheCat.Properties {
         internal static System.Drawing.Bitmap cat1 {
             get {
                 object obj = ResourceManager.GetObject("cat1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap puzzle_bg {
+            get {
+                object obj = ResourceManager.GetObject("puzzle_bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

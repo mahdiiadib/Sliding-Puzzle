@@ -23,12 +23,13 @@ namespace FixTheCat
         public Form1()
         {
             InitializeComponent();
+            Cursor = new Cursor("curPointer.cur");
             FillForm();
-            while(!isSolvable()) Shuffle();
+            while(!IsSolvable()) Shuffle();
         }
 
 
-        int getInvCount(int[] arr)
+        int GetInversionCount(int[] arr)
         {
             int inv_count = 0;
             for (int i = 0; i < 3 * 3 - 1; i++)
@@ -42,7 +43,7 @@ namespace FixTheCat
             return inv_count;
         }
 
-        bool isSolvable()
+        bool IsSolvable()
         {
             //int[] puzzle = { 1, 8, 2, 0, 4, 3, 7, 6, 5 };
             puzzle[0] = int.Parse(picBoxes[0, 0].Tag.ToString());
@@ -55,7 +56,7 @@ namespace FixTheCat
             puzzle[7] = int.Parse(picBoxes[2, 1].Tag.ToString());
             puzzle[8] = int.Parse(picBoxes[2, 2].Tag.ToString());
             
-            int inv = getInvCount(puzzle);
+            int inv = GetInversionCount(puzzle);
 
             //MessageBox.Show($"puzzle[0]: {puzzle[0]}");
             //MessageBox.Show($"puzzle[1]: {puzzle[1]}");
@@ -176,7 +177,8 @@ namespace FixTheCat
 
         void GoodClickWorks(int x, int y)
         {
-            picBoxes[x, y].Cursor = Cursors.Default;
+            //picBoxes[x, y].Cursor = Cursors.Default;
+            picBoxes[x, y].Cursor = new Cursor("curPointer.cur");
             picBoxes[x, y].Size = new Size(105, 105);
             lblClicks.Text = $"Clicks: {++clicks}";
             bool win = CheckWinner();
@@ -275,19 +277,21 @@ namespace FixTheCat
             if (res != ComparingImages.CompareResult.ciCompareOk)
             {
                 ((PictureBox)sender).Size = new Size(110, 110);
-                ((PictureBox)sender).Cursor = Cursors.Hand;
+                //((PictureBox)sender).Cursor = Cursors.Hand;
+                ((PictureBox)sender).Cursor = new Cursor("curHand.cur");
             }
         }
 
         private void OnPicBoxMouseLeave(object sender, EventArgs e)
         {
             ((PictureBox)sender).Size = new Size(105, 105);
-            ((PictureBox)sender).Cursor = Cursors.Default;
+            //((PictureBox)sender).Cursor = Cursors.Default;
+            ((PictureBox)sender).Cursor = new Cursor("curPointer.cur");
         }
 
         private void btnReshuffle_Click(object sender, EventArgs e)
         {
-            do Shuffle(); while (!isSolvable());
+            do Shuffle(); while (!IsSolvable());
         }
     }
 
