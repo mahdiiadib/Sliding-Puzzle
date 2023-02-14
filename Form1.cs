@@ -17,14 +17,61 @@ namespace FixTheCat
         Bitmap[,] images = new Bitmap[3, 3];
         string[,] tags = new string[3, 3];
         int clicks = 0;
+        int[] puzzle = new int[9];
 
 
         public Form1()
         {
             InitializeComponent();
             FillForm();
-            Shuffle();
+            while(!isSolvable()) Shuffle();
         }
+
+
+        int getInvCount(int[] arr)
+        {
+            int inv_count = 0;
+            for (int i = 0; i < 3 * 3 - 1; i++)
+            {
+                for (int j = i + 1; j < 3 * 3; j++)
+                {
+                    // count pairs(arr[i], arr[j]) such that i < j but arr[i] > arr[j]
+                    if (arr[j]!=0 && arr[i]!=0 && arr[i] > arr[j]) inv_count++;
+                }
+            }
+            return inv_count;
+        }
+
+        bool isSolvable()
+        {
+            //int[] puzzle = { 1, 8, 2, 0, 4, 3, 7, 6, 5 };
+            puzzle[0] = int.Parse(picBoxes[0, 0].Tag.ToString());
+            puzzle[1] = int.Parse(picBoxes[0, 1].Tag.ToString());
+            puzzle[2] = int.Parse(picBoxes[0, 2].Tag.ToString());
+            puzzle[3] = int.Parse(picBoxes[1, 0].Tag.ToString());
+            puzzle[4] = int.Parse(picBoxes[1, 1].Tag.ToString());
+            puzzle[5] = int.Parse(picBoxes[1, 2].Tag.ToString());
+            puzzle[6] = int.Parse(picBoxes[2, 0].Tag.ToString());
+            puzzle[7] = int.Parse(picBoxes[2, 1].Tag.ToString());
+            puzzle[8] = int.Parse(picBoxes[2, 2].Tag.ToString());
+            
+            int inv = getInvCount(puzzle);
+
+            //MessageBox.Show($"puzzle[0]: {puzzle[0]}");
+            //MessageBox.Show($"puzzle[1]: {puzzle[1]}");
+            //MessageBox.Show($"puzzle[2]: {puzzle[2]}");
+            //MessageBox.Show($"puzzle[3]: {puzzle[3]}");
+            //MessageBox.Show($"puzzle[4]: {puzzle[4]}");
+            //MessageBox.Show($"puzzle[5]: {puzzle[5]}");
+            //MessageBox.Show($"puzzle[6]: {puzzle[6]}");
+            //MessageBox.Show($"puzzle[7]: {puzzle[7]}");
+            //MessageBox.Show($"puzzle[8]: {puzzle[8]}");
+            //MessageBox.Show($"inv: {inv}");
+
+            if (inv > 0 && inv % 2 == 0) return true;
+            return false;
+        }
+
 
 
         void FillForm()
@@ -49,15 +96,15 @@ namespace FixTheCat
             images[2, 1] = Properties.Resources.c8;
             images[2, 2] = Properties.Resources.c9;
 
-            tags[0, 0] = "T00";
-            tags[0, 1] = "T01";
-            tags[0, 2] = "T02";
-            tags[1, 0] = "T10";
-            tags[1, 1] = "T11";
-            tags[1, 2] = "T12";
-            tags[2, 0] = "T20";
-            tags[2, 1] = "T21";
-            tags[2, 2] = "T22";
+            tags[0, 0] = "0";
+            tags[0, 1] = "1";
+            tags[0, 2] = "2";
+            tags[1, 0] = "3";
+            tags[1, 1] = "4";
+            tags[1, 2] = "5";
+            tags[2, 0] = "6";
+            tags[2, 1] = "7";
+            tags[2, 2] = "8";
 
             for (int i = 0; i < 3; i++)
             {
@@ -86,24 +133,24 @@ namespace FixTheCat
 
         void Shuffle()
         {
-            SwapPicBoxImage(ref pictureBox00, ref pictureBox01);
-            SwapPicBoxImage(ref pictureBox01, ref pictureBox11);
-            SwapPicBoxImage(ref pictureBox11, ref pictureBox21);
+            //SwapPicBoxImage(ref pictureBox00, ref pictureBox01);
+            //SwapPicBoxImage(ref pictureBox01, ref pictureBox11);
+            //SwapPicBoxImage(ref pictureBox11, ref pictureBox21);
 
 
-            //Random rnd = new Random();
-            //int swaps = rnd.Next(10, 21);
-            ////MessageBox.Show($"{swaps}");
+            Random rnd = new Random();
+            int swaps = rnd.Next(10, 21);
+            //MessageBox.Show($"{swaps}");
 
-            //for (int i = 1; i <= swaps; i++)
-            //{
-            //    int row1 = rnd.Next(0, 3);
-            //    int row2 = rnd.Next(0, 3);
-            //    int col1 = rnd.Next(0, 3);
-            //    int col2 = rnd.Next(0, 3);
-            //    //MessageBox.Show($"{row1}, {col1}, {row2}, {col2}");
-            //    SwapPicBoxImage(ref picBoxes[row1, col1], ref picBoxes[row2, col2]);
-            //}
+            for (int i = 1; i <= swaps; i++)
+            {
+                int row1 = rnd.Next(0, 3);
+                int row2 = rnd.Next(0, 3);
+                int col1 = rnd.Next(0, 3);
+                int col2 = rnd.Next(0, 3);
+                //MessageBox.Show($"{row1}, {col1}, {row2}, {col2}");
+                SwapPicBoxImage(ref picBoxes[row1, col1], ref picBoxes[row2, col2]);
+            }
 
             clicks = 0;
             lblClicks.Text = $"Clicks: {clicks}";
@@ -129,6 +176,7 @@ namespace FixTheCat
 
         void GoodClickWorks(int x, int y)
         {
+            picBoxes[x, y].Cursor = Cursors.Default;
             picBoxes[x, y].Size = new Size(105, 105);
             lblClicks.Text = $"Clicks: {++clicks}";
             bool win = CheckWinner();
@@ -224,17 +272,22 @@ namespace FixTheCat
             var b1 = Properties.Resources.solid_color_image;
             var b2 = (Bitmap)((PictureBox)sender).Image;
             var res = ComparingImages.Compare(b1, b2);
-            if (res != ComparingImages.CompareResult.ciCompareOk) ((PictureBox)sender).Size = new Size(110, 110);
+            if (res != ComparingImages.CompareResult.ciCompareOk)
+            {
+                ((PictureBox)sender).Size = new Size(110, 110);
+                ((PictureBox)sender).Cursor = Cursors.Hand;
+            }
         }
 
         private void OnPicBoxMouseLeave(object sender, EventArgs e)
         {
             ((PictureBox)sender).Size = new Size(105, 105);
+            ((PictureBox)sender).Cursor = Cursors.Default;
         }
 
         private void btnReshuffle_Click(object sender, EventArgs e)
         {
-            Shuffle();
+            do Shuffle(); while (!isSolvable());
         }
     }
 
@@ -284,3 +337,4 @@ namespace FixTheCat
     }
 
 }
+

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>cat.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -90,6 +93,7 @@
     <Content Include="c7.jpg" />
     <Content Include="c8.jpg" />
     <Content Include="c9.jpg" />
+    <Content Include="cat.ico" />
     <Content Include="cat.jpg" />
     <None Include="res\solid-color-image.jpeg" />
     <None Include="res\cat.jpg" />
@@ -102,6 +106,8 @@
     <None Include="res\c3.jpg" />
     <None Include="res\c2.jpg" />
     <None Include="res\c1.jpg" />
+    <Content Include="res\curHand3d.cur" />
+    <Content Include="res\curPointer3d.cur" />
     <Content Include="solid-color-image.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

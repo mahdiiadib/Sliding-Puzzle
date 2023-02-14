@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnReshuffle = new System.Windows.Forms.Button();
+            this.lblClicks = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox00 = new System.Windows.Forms.PictureBox();
             this.pictureBox02 = new System.Windows.Forms.PictureBox();
@@ -39,7 +41,6 @@
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.lblClicks = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox02)).BeginInit();
@@ -54,7 +55,8 @@
             // 
             // btnReshuffle
             // 
-            this.btnReshuffle.Location = new System.Drawing.Point(612, 117);
+            this.btnReshuffle.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReshuffle.Location = new System.Drawing.Point(397, 455);
             this.btnReshuffle.Name = "btnReshuffle";
             this.btnReshuffle.Size = new System.Drawing.Size(95, 41);
             this.btnReshuffle.TabIndex = 10;
@@ -62,19 +64,29 @@
             this.btnReshuffle.UseVisualStyleBackColor = true;
             this.btnReshuffle.Click += new System.EventHandler(this.btnReshuffle_Click);
             // 
+            // lblClicks
+            // 
+            this.lblClicks.AutoSize = true;
+            this.lblClicks.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClicks.Location = new System.Drawing.Point(171, 472);
+            this.lblClicks.Name = "lblClicks";
+            this.lblClicks.Size = new System.Drawing.Size(82, 24);
+            this.lblClicks.TabIndex = 12;
+            this.lblClicks.Text = "Clicks: 0";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::FixTheCat.Properties.Resources.cat1;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(220, 220);
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox00
             // 
-            this.pictureBox00.Location = new System.Drawing.Point(281, 117);
+            this.pictureBox00.Location = new System.Drawing.Point(175, 106);
             this.pictureBox00.Name = "pictureBox00";
             this.pictureBox00.Size = new System.Drawing.Size(105, 105);
             this.pictureBox00.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -86,7 +98,7 @@
             // 
             // pictureBox02
             // 
-            this.pictureBox02.Location = new System.Drawing.Point(493, 117);
+            this.pictureBox02.Location = new System.Drawing.Point(387, 106);
             this.pictureBox02.Name = "pictureBox02";
             this.pictureBox02.Size = new System.Drawing.Size(105, 105);
             this.pictureBox02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -98,7 +110,7 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.Location = new System.Drawing.Point(281, 223);
+            this.pictureBox10.Location = new System.Drawing.Point(175, 212);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(105, 105);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +122,7 @@
             // 
             // pictureBox01
             // 
-            this.pictureBox01.Location = new System.Drawing.Point(387, 117);
+            this.pictureBox01.Location = new System.Drawing.Point(281, 106);
             this.pictureBox01.Name = "pictureBox01";
             this.pictureBox01.Size = new System.Drawing.Size(105, 105);
             this.pictureBox01.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -122,7 +134,7 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.Location = new System.Drawing.Point(387, 223);
+            this.pictureBox11.Location = new System.Drawing.Point(281, 212);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(105, 105);
             this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -134,7 +146,7 @@
             // 
             // pictureBox22
             // 
-            this.pictureBox22.Location = new System.Drawing.Point(493, 328);
+            this.pictureBox22.Location = new System.Drawing.Point(387, 317);
             this.pictureBox22.Name = "pictureBox22";
             this.pictureBox22.Size = new System.Drawing.Size(105, 105);
             this.pictureBox22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -146,7 +158,7 @@
             // 
             // pictureBox20
             // 
-            this.pictureBox20.Location = new System.Drawing.Point(281, 328);
+            this.pictureBox20.Location = new System.Drawing.Point(175, 317);
             this.pictureBox20.Name = "pictureBox20";
             this.pictureBox20.Size = new System.Drawing.Size(105, 105);
             this.pictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -158,7 +170,7 @@
             // 
             // pictureBox21
             // 
-            this.pictureBox21.Location = new System.Drawing.Point(387, 328);
+            this.pictureBox21.Location = new System.Drawing.Point(281, 317);
             this.pictureBox21.Name = "pictureBox21";
             this.pictureBox21.Size = new System.Drawing.Size(105, 105);
             this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -170,7 +182,7 @@
             // 
             // pictureBox12
             // 
-            this.pictureBox12.Location = new System.Drawing.Point(493, 223);
+            this.pictureBox12.Location = new System.Drawing.Point(387, 212);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(105, 105);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -180,20 +192,11 @@
             this.pictureBox12.MouseEnter += new System.EventHandler(this.OnPicBoxMouseEnter);
             this.pictureBox12.MouseLeave += new System.EventHandler(this.OnPicBoxMouseLeave);
             // 
-            // lblClicks
-            // 
-            this.lblClicks.AutoSize = true;
-            this.lblClicks.Location = new System.Drawing.Point(281, 480);
-            this.lblClicks.Name = "lblClicks";
-            this.lblClicks.Size = new System.Drawing.Size(47, 13);
-            this.lblClicks.TabIndex = 12;
-            this.lblClicks.Text = "Clicks: 0";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 582);
+            this.ClientSize = new System.Drawing.Size(604, 581);
             this.Controls.Add(this.lblClicks);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReshuffle);
@@ -206,8 +209,12 @@
             this.Controls.Add(this.pictureBox20);
             this.Controls.Add(this.pictureBox21);
             this.Controls.Add(this.pictureBox12);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form 1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Fix The Cat";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox02)).EndInit();
