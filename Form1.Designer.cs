@@ -71,9 +71,9 @@
             this.lblClicks.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClicks.Location = new System.Drawing.Point(144, 496);
             this.lblClicks.Name = "lblClicks";
-            this.lblClicks.Size = new System.Drawing.Size(82, 24);
+            this.lblClicks.Size = new System.Drawing.Size(84, 24);
             this.lblClicks.TabIndex = 12;
-            this.lblClicks.Text = "Clicks: 0";
+            this.lblClicks.Text = "Moves: 0";
             // 
             // pictureBox1
             // 

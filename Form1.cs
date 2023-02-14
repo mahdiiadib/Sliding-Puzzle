@@ -154,7 +154,7 @@ namespace FixTheCat
             }
 
             clicks = 0;
-            lblClicks.Text = $"Clicks: {clicks}";
+            lblClicks.Text = $"Moves: {clicks}";
         }
 
 
@@ -180,11 +180,11 @@ namespace FixTheCat
             //picBoxes[x, y].Cursor = Cursors.Default;
             picBoxes[x, y].Cursor = new Cursor("curPointer.cur");
             picBoxes[x, y].Size = new Size(105, 105);
-            lblClicks.Text = $"Clicks: {++clicks}";
+            lblClicks.Text = $"Moves: {++clicks}";
             bool win = CheckWinner();
             if (win)
             {
-                DialogResult dr = MessageBox.Show($"Congratulations! You fixed the cat in {clicks} clicks!\nDo you wish to play again?", "Winner", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show($"Congratulations! You fixed the cat in {clicks} moves!\nDo you wish to play again?", "Winner", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes) Shuffle();
                 else Application.Exit();
             }
