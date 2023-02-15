@@ -212,28 +212,21 @@ namespace FixTheCat
             {
                 SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x + 1, y]);
                 GoodClickWorks(x, y);
-                return;
             }
-
-            if (isValid(x - 1, y))
+            else if (isValid(x - 1, y))
             {
                 SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x - 1, y]);
                 GoodClickWorks(x, y);
-                return;
             }
-
-            if (isValid(x, y + 1))
+            else if (isValid(x, y + 1))
             {
                 SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y + 1]);
                 GoodClickWorks(x, y);
-                return;
             }
-
-            if (isValid(x, y - 1))
+            else if (isValid(x, y - 1))
             {
                 SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y - 1]);
                 GoodClickWorks(x, y);
-                return;
             }
         }
 
