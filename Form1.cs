@@ -18,6 +18,7 @@ namespace FixTheCat
         string[,] tags = new string[3, 3];
         int clicks = 0;
         int[] puzzle = new int[9];
+        int N = 3;
 
 
         public Form1()
@@ -32,9 +33,9 @@ namespace FixTheCat
         int GetInversionCount(int[] arr)
         {
             int inv_count = 0;
-            for (int i = 0; i < 3 * 3 - 1; i++)
+            for (int i = 0; i < N * N - 1; i++)
             {
-                for (int j = i + 1; j < 3 * 3; j++)
+                for (int j = i + 1; j < N * N; j++)
                 {
                     // count pairs(arr[i], arr[j]) such that i < j but arr[i] > arr[j]
                     if (arr[j]!=0 && arr[i]!=0 && arr[i] > arr[j]) inv_count++;
@@ -46,27 +47,20 @@ namespace FixTheCat
         bool IsSolvable()
         {
             //int[] puzzle = { 1, 8, 2, 0, 4, 3, 7, 6, 5 };
-            puzzle[0] = int.Parse(picBoxes[0, 0].Tag.ToString());
-            puzzle[1] = int.Parse(picBoxes[0, 1].Tag.ToString());
-            puzzle[2] = int.Parse(picBoxes[0, 2].Tag.ToString());
-            puzzle[3] = int.Parse(picBoxes[1, 0].Tag.ToString());
-            puzzle[4] = int.Parse(picBoxes[1, 1].Tag.ToString());
-            puzzle[5] = int.Parse(picBoxes[1, 2].Tag.ToString());
-            puzzle[6] = int.Parse(picBoxes[2, 0].Tag.ToString());
-            puzzle[7] = int.Parse(picBoxes[2, 1].Tag.ToString());
-            puzzle[8] = int.Parse(picBoxes[2, 2].Tag.ToString());
-            
+
+            int cnt = 0;
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    puzzle[cnt++] = int.Parse(picBoxes[i, j].Tag.ToString());
+                }
+            }
+
             int inv = GetInversionCount(puzzle);
 
-            //MessageBox.Show($"puzzle[0]: {puzzle[0]}");
-            //MessageBox.Show($"puzzle[1]: {puzzle[1]}");
-            //MessageBox.Show($"puzzle[2]: {puzzle[2]}");
-            //MessageBox.Show($"puzzle[3]: {puzzle[3]}");
-            //MessageBox.Show($"puzzle[4]: {puzzle[4]}");
-            //MessageBox.Show($"puzzle[5]: {puzzle[5]}");
-            //MessageBox.Show($"puzzle[6]: {puzzle[6]}");
-            //MessageBox.Show($"puzzle[7]: {puzzle[7]}");
-            //MessageBox.Show($"puzzle[8]: {puzzle[8]}");
+            //cnt = 0;
+            //for (int i = 0; i < N; i++) for (int j = 0; j < N; j++) MessageBox.Show($"puzzle[{cnt}]: {puzzle[cnt]}");
             //MessageBox.Show($"inv: {inv}");
 
             if (inv > 0 && inv % 2 == 0) return true;
@@ -106,9 +100,9 @@ namespace FixTheCat
             tags[2, 1] = "7";
             tags[2, 2] = "8";
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < N; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < N; j++)
                 {
                     picBoxes[i, j].Image = images[i, j];
                     picBoxes[i, j].Tag = tags[i, j];
@@ -123,9 +117,9 @@ namespace FixTheCat
         bool CheckWinner()
         {
             //MessageBox.Show("Winner checking");
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < N; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < N; j++)
                 {
                     if (tags[i, j] != picBoxes[i, j].Tag.ToString()) return false;
                 }
@@ -141,8 +135,8 @@ namespace FixTheCat
             //SwapPicBoxImage(ref pictureBox11, ref pictureBox21);
 
 
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++) picBoxes[i, j].Enabled = true;
+            for (int i = 0; i < N; i++)
+                for (int j = 0; j < N; j++) picBoxes[i, j].Enabled = true;
 
             
             Random rnd = new Random();
