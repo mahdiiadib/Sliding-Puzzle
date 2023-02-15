@@ -25,7 +25,7 @@ namespace FixTheCat
             InitializeComponent();
             Cursor = new Cursor("curPointer.cur");
             FillForm();
-            while(!IsSolvable()) Shuffle();
+            //while(!IsSolvable()) Shuffle();
         }
 
 
@@ -74,7 +74,6 @@ namespace FixTheCat
         }
 
 
-
         void FillForm()
         {
             picBoxes[0, 0] = pictureBox00;
@@ -113,8 +112,11 @@ namespace FixTheCat
                 {
                     picBoxes[i, j].Image = images[i, j];
                     picBoxes[i, j].Tag = tags[i, j];
+                    picBoxes[i, j].Enabled = false;
                 }
             }
+
+            picBoxes[0, 0].Visible = false;
         }
 
 
@@ -139,6 +141,10 @@ namespace FixTheCat
             //SwapPicBoxImage(ref pictureBox11, ref pictureBox21);
 
 
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++) picBoxes[i, j].Enabled = true;
+
+            
             Random rnd = new Random();
             int swaps = rnd.Next(10, 21);
             //MessageBox.Show($"{swaps}");
@@ -160,18 +166,18 @@ namespace FixTheCat
 
         void SwapPicBoxImage(ref PictureBox a, ref PictureBox b)
         {
-            Image tmp; string stmp;
+            Image tmp; string stmp; bool vis;
 
-            tmp = a.Image; stmp = a.Tag.ToString();
-            a.Image = b.Image; a.Tag = b.Tag;
-            b.Image = tmp; b.Tag = stmp;
+            tmp = a.Image; stmp = a.Tag.ToString(); vis = a.Visible;
+            a.Image = b.Image; a.Tag = b.Tag; a.Visible = b.Visible;
+            b.Image = tmp; b.Tag = stmp; b.Visible = vis;
         }
 
 
         bool isValid(int i, int j)
         {
             //MessageBox.Show($"{i}, {j}: {i >= 0 && j >= 0 && i < 3 && j < 3}");
-            return i >= 0 && j >= 0 && i < 3 && j < 3;
+            return i >= 0 && j >= 0 && i < 3 && j < 3 && !picBoxes[i, j].Visible;
         }
 
 
@@ -202,79 +208,45 @@ namespace FixTheCat
                 {
                     if (picBoxes[i, j].Image == p.Image)
                     {
-                        x = i;
-                        y = j;
+                        x = i; y = j;
                         break;
                     }
                 }
             }
 
-
             if (isValid(x + 1, y))
             {
-                var b1 = Properties.Resources.solid_color_image;
-                var b2 = (Bitmap)picBoxes[x + 1, y].Image;
-                var res = ComparingImages.Compare(b1, b2);
-
-                if (res == ComparingImages.CompareResult.ciCompareOk)
-                {
-                    SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x + 1, y]);
-                    GoodClickWorks(x, y);
-                    return;
-                }
+                SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x + 1, y]);
+                GoodClickWorks(x, y);
+                return;
             }
-            
+
             if (isValid(x - 1, y))
             {
-                var b1 = Properties.Resources.solid_color_image;
-                var b2 = (Bitmap)picBoxes[x - 1, y].Image;
-                var res = ComparingImages.Compare(b1, b2);
-
-                if (res == ComparingImages.CompareResult.ciCompareOk)
-                {
-                    SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x - 1, y]);
-                    GoodClickWorks(x, y);
-                    return;
-                }
+                SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x - 1, y]);
+                GoodClickWorks(x, y);
+                return;
             }
-            
+
             if (isValid(x, y + 1))
             {
-                var b1 = Properties.Resources.solid_color_image;
-                var b2 = (Bitmap)picBoxes[x, y + 1].Image;
-                var res = ComparingImages.Compare(b1, b2);
-
-                if (res == ComparingImages.CompareResult.ciCompareOk)
-                {
-                    SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y + 1]);
-                    GoodClickWorks(x, y);
-                    return;
-                }
+                SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y + 1]);
+                GoodClickWorks(x, y);
+                return;
             }
-            
+
             if (isValid(x, y - 1))
             {
-                var b1 = Properties.Resources.solid_color_image;
-                var b2 = (Bitmap)picBoxes[x, y - 1].Image;
-                var res = ComparingImages.Compare(b1, b2);
-
-                if (res == ComparingImages.CompareResult.ciCompareOk)
-                {
-                    SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y - 1]);
-                    GoodClickWorks(x, y);
-                    return;
-                }
+                SwapPicBoxImage(ref picBoxes[x, y], ref picBoxes[x, y - 1]);
+                GoodClickWorks(x, y);
+                return;
             }
-
-            //if (!moveOver) MessageBox.Show("No space to move.");
         }
+
 
         private void OnPicBoxMouseEnter(object sender, EventArgs e)
         {
-            var b1 = Properties.Resources.solid_color_image;
-            var b2 = (Bitmap)((PictureBox)sender).Image;
-            var res = ComparingImages.Compare(b1, b2);
-            if (res != ComparingImages.CompareResult.ciCompareOk)
+            if (((PictureBox)sender).Visible)
             {
                 ((PictureBox)sender).Size = new Size(110, 110);
                 //((PictureBox)sender).Cursor = Cursors.Hand;
@@ -282,12 +254,14 @@ namespace FixTheCat
             }
         }
 
+
         private void OnPicBoxMouseLeave(object sender, EventArgs e)
         {
             ((PictureBox)sender).Size = new Size(105, 105);
             //((PictureBox)sender).Cursor = Cursors.Default;
             ((PictureBox)sender).Cursor = new Cursor("curPointer.cur");
         }
+
 
         private void btnReshuffle_Click(object sender, EventArgs e)
         {
@@ -297,6 +271,9 @@ namespace FixTheCat
 
 
 
+
+
+    /*
 
     public class ComparingImages
     {
@@ -339,6 +316,8 @@ namespace FixTheCat
             return cr;
         }
     }
+
+    */
 
 }
 

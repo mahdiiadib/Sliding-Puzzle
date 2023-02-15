@@ -60,7 +60,7 @@
             this.btnReshuffle.Name = "btnReshuffle";
             this.btnReshuffle.Size = new System.Drawing.Size(95, 41);
             this.btnReshuffle.TabIndex = 10;
-            this.btnReshuffle.Text = "Reshuffle";
+            this.btnReshuffle.Text = "Shuffle";
             this.btnReshuffle.UseVisualStyleBackColor = true;
             this.btnReshuffle.Click += new System.EventHandler(this.btnReshuffle_Click);
             // 
